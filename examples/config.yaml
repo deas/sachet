@@ -40,6 +40,11 @@ providers:
   sipgate:
     username: 'username'
     password: 'password'
+  smseagle:
+    baseurl: "http://localhost:1234/index.php/http_api/"
+    login: 'username'
+    pass: 'password'
+    group: false
 
 templates:
   - telegram.tmpl
@@ -55,4 +60,9 @@ receivers:
     to:
       - '164451814' # the chat id of a user. Get yours at https://telegram.me/userinfobot
     text: '{{ .GroupLabels.alertname }} @ {{ .Labels.instance }}: {{ .Status | toUpper }}'
+  - name: 'team-smseagle'
+    provider: 'smseagle'
+    to:
+      - 'abcd' # the contactname or groupname
+    text: 'foo'
 
